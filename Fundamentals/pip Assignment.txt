@@ -1,0 +1,101 @@
+@@@\/*****LINE 1*****\/@@@
+pip install Django
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     Collecting Django
+     Downloading Django-1.11.5-py2.py3-none-any.whl (6.9MB)
+         100% |################################| 7.0MB 173kB/s
+     Collecting pytz (from Django)
+       Downloading pytz-2017.2-py2.py3-none-any.whl (484kB)
+         100% |################################| 491kB 1.9MB/s
+     Installing collected packages: pytz, Django
+     Successfully installed Django-1.11.5 pytz-2017.2
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     ** installed the Django package to the Python Library and Scripts
+
+
+@@@\/*****LINE 2*****\/@@@
+pip list
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     click (6.7)
+     Django (1.11.5)
+     Flask (0.12.2)
+     itsdangerous (0.24)
+     Jinja2 (2.9.6)
+     MarkupSafe (1.0)
+     pip (9.0.1)
+     pytz (2017.2)
+     setuptools (28.8.0)
+     Werkzeug (0.12.2)
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     ** lists the installed Python packages with version number, including editables
+
+@@@\/*****LINE 3*****\/@@@
+pip install Django (We know you already ran this one. What information do you see returned in terminal after this command?)
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     Requirement already satisfied: Django in c:\python27\lib\site-packages
+     Requirement already satisfied: pytz in c:\python27\lib\site-packages (from Django)
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     ** the package was already installed; the pip install searches for previously installed packages, and if it is installed, the install action aborts
+
+@@@\/*****LINE 4*****\/@@@
+pip freeze (What's the difference between freeze and list?)
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     click==6.7
+     Django==1.11.5
+     Flask==0.12.2
+     itsdangerous==0.24
+     Jinja2==2.9.6
+     MarkupSafe==1.0
+     pytz==2017.2
+     Werkzeug==0.12.2
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     ** outputs all installed packages in a requirements format (==)
+
+@@@\/*****LINE 5*****\/@@@
+First cd into your Desktop directory (cd ~/Desktop), then run this command: pip freeze > requirements.txt. What do you see when you ls? What's inside this file?
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     (same output as freeze, inside the txt file)
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     ** outputs list of installed packages in a text file
+
+@@@\/*****LINE 6*****\/@@@
+pip uninstall Django
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     Uninstalling Django-1.11.5:
+     c:\python27\lib\site-packages\django-1.11.5.dist-info\description.rst
+     ....
+     Proceed (y/n)?
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     uninstalled all library and script package files related to the Django package ... with user verification
+
+@@@\/*****LINE 7*****\/@@@
+pip show Django
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     nothing after uninstall
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     otherwise for an installed package it would display relevant information about the installed package
+     - name, version, summary, home-page, author, author's email, license, package requirements (other packages)
+
+@@@\/*****LINE 8*****\/@@@
+pip search Flask. This one might take a moment to execute.
+
+     |\/|\/|*****OUTPUT*****|\/|\/|
+     - a long list of packages referencing Flask in the name or summary
+     - the list of packages provide name and summary
+
+     |\/|\/|*****DESCRIPTION*****|\/|\/|
+     
