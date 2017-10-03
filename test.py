@@ -14,4 +14,4 @@ Three quotes
 Also a multi-line comment
 """
 x += [2]
-print x
+print type(x)
