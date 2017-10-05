@@ -1,10 +1,9 @@
-from flask import Flask  # Import Flask to allow us to create our app.
-app = Flask(__name__)    # Global variable __name__ tells Flask whether or not we are running the file
-                         # directly, or importing it as a module.
+from flask import Flask, render_template
+app = Flask(__name__)
+
 @app.route('/')
 def hello_world():
-  html_string = "<h1>Today is Thursday</h1><p>Hello World!!!</p>"
-  return html_string
+  return render_template('index.html')
 
 @app.route('/show_dogs')
 def show_dogs():
