@@ -10,8 +10,14 @@
 </head>
 <body>
     <div class='container'>
-        <h1>Welcome to our Landing Page!</h1>
+        <h1>Welcome to the Form Landing Page!</h1>
         <p>Greetings</p>
+        <p>Submit information below ....</p>
+        <form action='/process' method='post'>
+            Your Name: <input type='text' name='name'>
+            Your Email: <input type='text' name='email'>
+            <input type='submit' value='create user'>
+        </form>
     </div>
 </body>
 </html>
