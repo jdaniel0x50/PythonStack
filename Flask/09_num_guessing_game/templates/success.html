@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton2.css') }}">
+    <title>You Won!</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Welcome to the Great Number Game!</h1>
+        <p>I am thinking of a number between 1 and 100</p>
+        <h5 class="bold">Take a guess!</h5>
+        <div class="guess_result {{ session['div_visible'] }} {{ session['div_color'] }}">
+            <h2>{{ session['div_text'] }} was the number!</h2>
+            <form action='/success' method='POST'>
+                <input type='submit' value='Play again!'>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
