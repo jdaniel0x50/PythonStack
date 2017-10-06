@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton2.css') }}">
+    <title>Your Submission</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Thank you for your submission!</h1>
+        <p>The following information was recorded:</p>
+        <div class='container'>
+            <p class='bold underline column'>Name:</p>
+            <p class='column'>{{ name }}</p>
+        </div>
+        <div class='container'>
+            <p class='bold underline column'>Dojo Location:</p>
+            <p class='column'>{{ location }}</p>
+        </div>
+        <div class='container'>
+            <p class='bold underline column'>Favorite Language:</p>
+            <p class='column'>{{ language }}</p>
+        </div>
+        <div class='container'>
+            <p class='bold underline column'>Comment:</p>
+            <p class='column'>{{ comment }}</p>
+        </div>
+    </div>
+</body>
+</html>

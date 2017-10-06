@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton2.css') }}">
+    <title>Dojo Survey Page</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Dojo Survey</h1>
+        <p>Thank you for participating in our survey!</p>
+        <p>Please submit your information below ....</p>
+        <form action='/usersubmit' method='post'>
+            <div class='row'>
+                Your Name: <input class='rightalign' type='text' name='name'>
+            </div>
+            <div class='row'>
+                Dojo Location: <input class='rightalign' list='locations' name='location'>
+                <datalist id='locations'>
+                    <option value='Chicago'>Chicago</option>
+                    <option value='San Francisco'>San Francisco</option>
+                    <option value='Denver'>Denver</option>
+                    <option value='Atlanta'>Atlanta</option>
+                    <option value='Boston'>Boston</option>
+                    <option value='Dallas'>Dallas</option>
+                </datalist>
+            </div>
+            <div class='row'>
+                Favorite Language: <input class='rightalign' list='languages' name='language'>
+                <datalist id='languages'>
+                    <option value='HTML'>HTML</option>
+                    <option value='JavaScript'>JavaScript</option>
+                    <option value='Python'>Python</option>
+                    <option value='C/C++'>C/C++</option>
+                    <option value='Java'>Java</option>
+                    <option value='SQL'>SQL</option>
+                </datalist>
+            </div>
+            <div class='row'>
+                Comment (optional): <input class='rightalign' type='textarea' name='comment'>
+            </div>
+            <div class='row'>
+                <input type='submit' value='submit survey'>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
