@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton2.css') }}">
+    <title>Ninja Money Game</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Let's Hunt for Gold!</h1>
+        <div class='row'>
+            <p>Your Gold:</p>
+            <p class='gold'>{{ session['total_gold'] }}</p>
+        </div>
+        <div class='row'>
+            <form class='three columns game' action='/process_money' method='POST'>
+                <h2>Farm</h2>
+                <p>(earns 10-20 gold)</p>
+                <input type="hidden" name="building" value="farm">
+                <input type='submit' name='farm_gold' value='find gold!'>
+            </form>
+            <form class='three columns game' action='/process_money' method='POST'>
+                <h2>Cave</h2>
+                <p>(earns 5-10 gold)</p>
+                <input type="hidden" name="building" value="cave">
+                <input type='submit' name='cave_gold' value='find gold!'>
+            </form>
+            <form class='three columns game' action='/process_money' method='POST'>
+                <h2>House</h2>
+                <p>(earns 2-5 gold)</p>
+                <input type="hidden" name="building" value="house">
+                <input type='submit' name='house_gold' value='find gold!'>
+            </form>
+            <form class='three columns game' action='/process_money' method='POST'>
+                <h2>Casino</h2>
+                <p>(earns/takes 0-50 gold)</p>
+                <input type="hidden" name="building" value="casino">
+                <input type='submit' name='casino_gold' value='find gold!'>
+            </form>
+        </div>
+        <p class="left underline bold {{ session['visibility'] }}">Activities:</p>
+        <div class="left container scrollbar {{ session['visibility'] }}">
+            {% for (text_color, activity) in session['activity'] %}
+                <p class="{{text_color}}">{{activity}}</p>
+            {% endfor %}
+        </div>
+        <form action='/process_money' method='POST'>
+            <input type='hidden' name='building' value='restart'>
+            <input type='submit' name='restart' value='restart game'>
+        </form>
+    </div>
+</body>
+</html>
