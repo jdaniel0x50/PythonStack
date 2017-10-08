@@ -42,7 +42,6 @@ def submit_form():
         session['user_location'] = request.form['location']
         session['user_language'] = request.form['language']
         session['user_comment'] = request.form['comment']
-        print session['user_comment']
         validation_errors = False
         if len(session['user_name']) < 1:
             flash_msg = const_flash_message("name")

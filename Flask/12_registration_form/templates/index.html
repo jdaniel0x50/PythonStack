@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Register</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Registration Form</h1>
+        <p>Please provide the information below to register for our services ....</p>
+        <form action='/process_reg' method='POST'>
+            <div class='row'>
+                <label for="name_first">First Name:</label>
+                <input class='rightalign' type='text' name='name_first' value={{session['name_first']}}>
+            </div>
+            <div class='row'>
+                <label for="name_last">Last Name:</label>
+                <input class='rightalign' type='text' name='name_last' value={{session['name_last']}}>
+            </div>
+            <div class='row'>
+                <label for="email">Email:</label>
+                <input class='rightalign' type='text' name='email' value={{session['email']}}>
+            </div>
+            <div class='row'>
+                    <label for="birthdate">Birthdate:</label>
+                    <input class='rightalign' type='date' name="birthdate" max="{{session['date_max']}}" value="{{session['birthdate']}}">
+            </div>
+            <div class='row'>
+                <label for="passwd">Password:</label>
+                <input class='rightalign' type='password' name='passwd' value={{session['passwd']}}>
+            </div>
+            <div class='row'>
+                <label for="passwd_conf">Confirm Password:</label>
+                <input class='rightalign' type='password' name='passwd_conf' value={{session['passwd_conf']}}>
+            </div>
+            <div class='row'>
+                <input type='submit' name='button' value='register'>
+            </div>
+            <div class='row'>
+                <input type='submit' name='button' value='reset'>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
