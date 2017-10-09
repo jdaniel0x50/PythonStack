@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Document Upload</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Upload your file here:</h1>
+        <form action='/process_upload'  enctype='multipart/form-data' method='POST'>
+            <div class='row'>
+                <input type='file' name='file'>
+                <input type='submit' name='button' value='submit'>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

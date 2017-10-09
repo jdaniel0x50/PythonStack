@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Registration Complete</title>
+</head>
+<body>
+    <div class='container'>
+        <h3>Thank you for your submitting your information.</h3>
+        <p>Your registration information was submitted:</p>
+        <div class='container'>
+            <p class='bold underline column'>First Name:</p>
+            <p class='column'>{{ session['name_first'] }}</p>
+        </div>
+        <div class='container'>
+                <p class='bold underline column'>Last Name:</p>
+                <p class='column'>{{ session['name_last'] }}</p>
+            </div>
+        <div class='container'>
+                <p class='bold underline column'>Email:</p>
+                <p class='column'>{{ session['email'] }}</p>
+        </div>
+        <div class='container'>
+                <p class='bold underline column'>Birthdate:</p>
+                <p class='column'>{{ session['birthdate'] }}</p>
+        </div>
+    </div>
+</body>
+</html>

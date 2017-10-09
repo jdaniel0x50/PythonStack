@@ -1,12 +1,20 @@
-from flask import Flask, redirect, render_template, request, url_for, session, flash
-import re, datetime
+import os
+from flask import Flask, redirect, render_template, request, url_for, session
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = '/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 app.secret_key = "MySecretKey@!"
 # force cache refresh for all file requests, including style sheets
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.+_-]+\.[a-zA-Z]+$')
-PASSWORD_REGEX = re.compile(r'\d.*[A-Z]|[A-Z].*\d')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 
 def construct_flash_message(error_cat, field_name):
     # construct flash message from parameters
