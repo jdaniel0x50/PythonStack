@@ -1,0 +1,451 @@
+1. What query would you run to get the total revenue for March of 2012?
+use lead_gen_business;
+
+SELECT DATE_FORMAT(charged_datetime, "%Y-%m") AS billing_year_month, 
+	CONCAT('$', FORMAT(SUM(amount), 2)) AS total_revenue
+
+FROM billing
+
+WHERE DATE_FORMAT(charged_datetime, "%Y-%m") = "2012-03"
+
+GROUP BY billing_year_month
+;
+
+__RESULTS:__
+2012-03		$35,646.00
+
+
+2. What query would you run to get total revenue collected from the client with an id of 2?
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name, 
+	CONCAT('$', FORMAT(SUM(amount), 2)) AS total_revenue
+
+FROM billing
+
+JOIN clients ON billing.client_id = clients.client_id
+
+WHERE billing.client_id = 2
+
+GROUP BY billing.client_id;
+
+
+__RESULTS:__
+Joe Smith	$18,639.00
+
+
+3. What query would you run to get all the sites that client=10 owns?
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name, 
+	sites.domain_name AS sites_owned
+
+FROM sites
+
+JOIN clients ON sites.client_id = clients.client_id
+
+WHERE sites.client_id = 10;
+
+
+
+__RESULTS:__
+Roosevelt Sebial	searchcomputers.com
+Roosevelt Sebial	rogers.com
+
+
+4. What query would you run to get total # of sites created per month per year for the client with an id of 1? What about for client=20?
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name, 
+	DATE_FORMAT(sites.created_datetime, "%Y-%m") AS month_of_year, 
+	COUNT(sites.site_id) AS number_sites
+
+FROM sites
+
+JOIN clients ON sites.client_id = clients.client_id
+
+WHERE sites.client_id = 1
+
+GROUP BY month_of_year
+
+ORDER BY month_of_year;
+
+
+
+__RESULTS (for client_id=1):__
+Michael Choi	2010-11		1
+Michael Choi	2011-04		1
+Michael Choi	2011-09		1
+Michael Choi	2011-12		1
+Michael Choi	2012-11		1
+
+__RESULTS (for client_id=20):__
+Caesar Stewart	2011-10		1
+
+
+5. What query would you run to get the total # of leads generated for each of the sites between January 1, 2011 to February 15, 2011?
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name,
+ 	sites.domain_name AS site,
+	COUNT(leads.leads_id) AS number_of_leads
+
+FROM clients
+
+LEFT JOIN sites ON clients.client_id = sites.client_id
+
+LEFT JOIN leads ON sites.site_id = leads.site_id
+
+WHERE sites.created_datetime >= DATE("2011-01-01")
+	AND sites.created_datetime <= DATE("2011-02-15")
+
+GROUP BY sites.site_id
+
+ORDER BY clients.first_name;
+
+
+__RESULTS:__
+Diana Sue Manlulu	ehow.com		6
+Joe Smith		fox.com			7
+Ryan Owen		searchhomes.com		6
+Tom Owen		searchphilippines.com	10
+Toni Rose Panganiban	searchcoronado.com	6
+
+
+6. What query would you run to get a list of client names and the total # of leads we've generated for each of our clients between January 1, 2011 to December 31, 2011?
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name,
+	COUNT(leads.leads_id) AS number_of_leads
+
+FROM clients
+
+LEFT JOIN sites ON clients.client_id = sites.client_id
+
+LEFT JOIN leads ON sites.site_id = leads.site_id
+
+WHERE sites.created_datetime >= DATE("2011-01-01")
+	AND sites.created_datetime <= DATE("2011-12-31")
+
+GROUP BY clients.client_id
+
+ORDER BY clients.first_name;
+
+
+
+__RESULTS:__
+Caesar Stewart		2
+Diana Sue Manlulu	12
+Ferdinand Schmidt	2
+Joe Smith		23
+John Supsupin		18
+Maria Gonzales		11
+Masaki Fujimuto		21
+Michael Choi		19
+Roosevelt Sebial	5
+Ryan Owen		23
+Tom Owen		22
+Toni Rose Panganiban	30
+
+
+7. What query would you run to get a list of client names and the total # of leads we've generated for each client each month between months 1 - 6 of Year 2011?
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name,
+	DATE_FORMAT(sites.created_datetime, "%Y-%m") AS month_of_year,
+	COUNT(leads.leads_id) AS number_of_leads
+
+FROM clients
+
+LEFT JOIN sites ON clients.client_id = sites.client_id
+
+LEFT JOIN leads ON sites.site_id = leads.site_id
+
+WHERE DATE_FORMAT(sites.created_datetime, "%Y") = 2011
+
+	AND DATE_FORMAT(sites.created_datetime, "%m") >= 1
+	AND DATE_FORMAT(sites.created_datetime, "%m") <= 6
+
+GROUP BY clients.client_id, month_of_year
+
+ORDER BY clients.first_name, month_of_year;
+
+
+__RESULTS:__
+Diana Sue Manlulu	2011-01		6
+Diana Sue Manlulu	2011-06		6
+Joe Smith		2011-02		7
+Joe Smith		2011-06		5
+John Supsupin		2011-03		4
+John Supsupin		2011-05		8
+Maria Gonzales		2011-03		4
+Masaki Fujimuto		2011-02		7
+Masaki Fujimuto		2011-05		9
+Masaki Fujimuto		2011-06		5
+Michael Choi		2011-04		8
+Roosevelt Sebial	2011-04		5
+Ryan Owen		2011-01		6
+Ryan Owen		2011-06		10
+Tom Owen		2011-02		10
+Toni Rose Panganiban	2011-01		6
+Toni Rose Panganiban	2011-06		5
+
+
+8. What query would you run to get a list of client names and the total # of leads we've generated for each of our clients' sites between January 1, 2011 to December 31, 2011? Order this query by client id.  Come up with a second query that shows all the clients, the site name(s), and the total number of leads generated from each site for all time.
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name,
+	sites.domain_name,
+
+	COUNT(leads.leads_id) AS number_of_leads
+
+FROM clients
+
+LEFT JOIN sites ON clients.client_id = sites.client_id
+
+LEFT JOIN leads ON sites.site_id = leads.site_id
+
+WHERE DATE_FORMAT(sites.created_datetime, "%Y") = 2011
+
+GROUP BY clients.client_id, sites.site_id
+
+ORDER BY clients.first_name, sites.domain_name;
+
+
+__RESULTS:__
+Caesar Stewart		wright.com		2
+Diana Sue Manlulu	ehow.com		6
+Diana Sue Manlulu	olx.com			6
+Ferdinand Schmidt	hopkins.com		2
+Joe Smith		connectme.com		4
+Joe Smith		flipfly.com		5
+Joe Smith		fox.com			7
+Joe Smith		reyes.com		7
+John Supsupin		keepvid.com		6
+John Supsupin		searchvillage.com	4
+John Supsupin		uptownzone.com		8
+Maria Gonzales		homes.com		4
+Maria Gonzales		warcraft.com		7
+Masaki Fujimuto		cryshinjohn.com		5
+Masaki Fujimuto		help.com		9
+Masaki Fujimuto		loans.com		7
+Michael Choi		assignmentworld.com	5
+Michael Choi		drake.com		6
+Michael Choi		youtube.com		8
+Roosevelt Sebial	searchcomputers.com	5
+Ryan Owen		family.com		10
+Ryan Owen		finalsite.com		7
+Ryan Owen		searchhomes.com		6
+Tom Owen		searchphilippines.com	10
+Tom Owen		yestogod.com		12
+Toni Rose Panganiban	atech.com		13
+Toni Rose Panganiban	lamb.com		6
+Toni Rose Panganiban	searchcoronado.com	6
+Toni Rose Panganiban	timespace.com		5
+
+
+*** VERSION TWO : ALL TIME ***
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name,
+	sites.domain_name,
+
+	COUNT(leads.leads_id) AS number_of_leads
+
+FROM clients
+
+LEFT JOIN sites ON clients.client_id = sites.client_id
+
+LEFT JOIN leads ON sites.site_id = leads.site_id
+
+GROUP BY clients.client_id, sites.site_id
+
+ORDER BY clients.first_name, sites.domain_name;
+
+
+__RESULTS:__
+Alexa Schroeder		baird.com		6
+Alexa Schroeder		collier.com		8
+Alexa Schroeder		jarvis.com		2
+Alvin Malone		lowe.com		2
+Caesar Stewart		wright.com		2
+Callie Poole		mcmahon.com		4
+Callie Poole		webb.com		9
+Diana Sue Manlulu	alexander.com		5
+Diana Sue Manlulu	ehow.com		6
+Diana Sue Manlulu	floyd.com		3
+Diana Sue Manlulu	olx.com			6
+Erica Suarez		hester.com		9
+Erica Suarez		rodgers.com		4
+Ferdinand Schmidt	albert.com		5
+Ferdinand Schmidt	hopkins.com		2
+Ferdinand Schmidt	marquez.com		7
+Francis Walsh		alston.com		4
+Hyacinth 		Bates			0
+Joe Smith		connectme.com		4
+Joe Smith		flipfly.com		5
+Joe Smith		fox.com			7
+Joe Smith		olson.com		6
+Joe Smith		reyes.com		7
+Joe Smith		waters.com		5
+John Supsupin		byers.com		3
+John Supsupin		keepvid.com		6
+John Supsupin		massey.com		6
+John Supsupin		park.com		5
+John Supsupin		searchvillage.com	4
+John Supsupin		uptownzone.com		8
+Maria Gonzales		duran.com		7
+Maria Gonzales		homes.com		4
+Maria Gonzales		warcraft.com		7
+Masaki Fujimuto		cryshinjohn.com		5
+Masaki Fujimuto		help.com		9
+Masaki Fujimuto		loans.com		7
+Michael Choi		assignmentworld.com	5
+Michael Choi		drake.com		6
+Michael Choi		market.com		13
+Michael Choi		serrano.com		3
+Michael Choi		youtube.com		8
+Roosevelt Sebial	rogers.com		5
+Roosevelt Sebial	searchcomputers.com	5
+Ryan Owen		decker.com		9
+Ryan Owen		family.com		10
+Ryan Owen		finalsite.com		7
+Ryan Owen		searchhomes.com		6
+Shafira Hansen		johnston.com		5
+Shafira Hansen		phillips.com		8
+Shafira Hansen		valencia.com		4
+Tom Owen		searchphilippines.com	10
+Tom Owen		yestogod.com		12
+Toni Rose Panganiban	atech.com		13
+Toni Rose Panganiban	lamb.com		6
+Toni Rose Panganiban	searchcoronado.com	6
+Toni Rose Panganiban	timespace.com		5
+Ursula Holt					0
+
+
+9. Write a single query that retrieves total revenue collected from each client for each month of the year. Order it by client id.
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name,
+	DATE_FORMAT(charged_datetime, "%Y-%m") AS billing_year_month,
+
+	CONCAT('$', FORMAT(SUM(amount), 2)) AS total_revenue
+
+FROM billing
+
+LEFT JOIN clients ON billing.client_id = clients.client_id
+
+GROUP BY clients.client_id, billing_year_month
+
+ORDER BY clients.first_name, billing_year_month;
+
+
+__RESULTS:__
+Alexa Schroeder		2011-09	$2,643.00
+Alexa Schroeder		2012-05	$6,542.00
+Alexa Schroeder		2012-07	$1,184.00
+Alexa Schroeder		2012-10	$3,058.00
+Alvin Malone		2011-07	$2,248.00
+Alvin Malone		2011-12	$1,529.00
+Alvin Malone		2012-01	$5,995.00
+Alvin Malone		2012-06	$5,978.00
+Caesar Stewart		2012-01	$4,912.00
+Caesar Stewart		2012-03	$3,084.00
+Caesar Stewart		2012-04	$5,268.00
+Caesar Stewart		2012-06	$5,495.00
+Caesar Stewart		2012-08	$5,459.00
+Caesar Stewart		2012-09	$7,313.00
+Caesar Stewart		2012-11	$2,427.00
+Callie Poole		2011-09	$2,191.00
+Callie Poole		2011-12	$4,026.00
+Callie Poole		2012-06	$5,448.00
+Diana Sue Manlulu	2011-02	$500.00
+Diana Sue Manlulu	2012-01	$6,311.00
+Diana Sue Manlulu	2012-02	$5,970.00
+Diana Sue Manlulu	2012-03	$6,544.00
+Diana Sue Manlulu	2012-06	$5,466.00
+Diana Sue Manlulu	2012-07	$5,885.00
+Erica Suarez		2012-04	$2,847.00
+Erica Suarez		2012-10	$5,682.00
+Ferdinand Schmidt	2011-07	$5,236.00
+Ferdinand Schmidt	2012-02	$1,961.00
+Ferdinand Schmidt	2012-03	$3,264.00
+Ferdinand Schmidt	2012-08	$9,511.00
+Francis Walsh		2011-10	$5,259.00
+Francis Walsh		2012-04	$1,128.00
+Francis Walsh		2012-06	$10,057.00
+Francis Walsh		2012-11	$1,975.00
+Hyacinth Bates		2011-10	$2,284.00
+Hyacinth Bates		2012-04	$6,007.00
+Hyacinth Bates		2012-05	$4,781.00
+Hyacinth Bates		2012-10	$4,955.00
+Joe Smith		2011-04	$1,000.00
+Joe Smith		2011-06	$900.00
+Joe Smith		2012-01	$3,600.00
+Joe Smith		2012-04	$3,795.00
+Joe Smith		2012-05	$1,117.00
+Joe Smith		2012-07	$5,952.00
+Joe Smith		2012-08	$2,275.00
+John Supsupin		2011-05	$500.00
+John Supsupin		2011-06	$750.00
+John Supsupin		2011-07	$1,246.00
+John Supsupin		2011-10	$7,096.00
+John Supsupin		2012-07	$1,910.00
+Maria Gonzales		2011-03	$1,000.00
+Maria Gonzales		2011-07	$100.00
+Maria Gonzales		2012-02	$8,000.00
+Maria Gonzales		2012-03	$2,907.00
+Masaki Fujimuto		2011-04	$200.00
+Masaki Fujimuto		2011-06	$800.00
+Masaki Fujimuto		2011-07	$2,733.00
+Masaki Fujimuto		2011-08	$650.00
+Masaki Fujimuto		2011-11	$2,780.00
+Masaki Fujimuto		2012-05	$2,663.00
+Michael Choi		2011-01	$300.00
+Michael Choi		2011-04	$5,000.00
+Michael Choi		2011-09	$450.00
+Michael Choi		2011-10	$4,052.00
+Michael Choi		2012-03	$6,629.00
+Michael Choi		2012-05	$5,904.00
+Michael Choi		2012-09	$1,776.00
+Roosevelt Sebial	2011-03	$500.00
+Roosevelt Sebial	2011-11	$4,254.00
+Roosevelt Sebial	2012-01	$1,407.00
+Roosevelt Sebial	2012-04	$680.00
+Roosevelt Sebial	2012-07	$5,344.00
+Roosevelt Sebial	2012-10	$5,851.00
+Roosevelt Sebial	2012-11	$2,066.00
+Ryan Owen		2011-01	$500.00
+Ryan Owen		2011-07	$5,200.00
+Ryan Owen		2011-09	$3,217.00
+Ryan Owen		2012-05	$1,409.00
+Shafira Hansen		2011-11	$3,902.00
+Shafira Hansen		2012-03	$8,746.00
+Tom Owen		2011-02	$2,500.00
+Tom Owen		2011-07	$4,181.00
+Tom Owen		2012-04	$150.00
+Toni Rose Panganiban	2011-02	$1,200.00
+Toni Rose Panganiban	2012-03	$4,472.00
+Toni Rose Panganiban	2012-09	$3,137.00
+Toni Rose Panganiban	2012-11	$2,496.00
+Ursula Holt		2011-07	$6,682.00
+Ursula Holt		2011-09	$5,779.00
+
+
+10. Write a single query that retrieves all the sites that each client owns. Group the results so that each row shows a new client. It will become clearer when you add a new field called 'sites' that has all the sites that the client owns. (HINT: use GROUP_CONCAT)
+SELECT CONCAT_WS(" ", clients.first_name, clients.last_name) AS client_name,
+
+	GROUP_CONCAT(sites.domain_name, ",  ") AS sites_owned
+
+FROM clients
+
+LEFT JOIN sites ON clients.client_id = sites.client_id
+
+GROUP BY clients.client_id
+
+ORDER BY clients.first_name, sites.domain_name;
+
+
+__RESULTS:__
+Alexa Schroeder		jarvis.com,  ,baird.com,  ,collier.com,  
+Alvin Malone		lowe.com,  
+Caesar Stewart		wright.com,  
+Callie Poole		mcmahon.com,  ,webb.com,  
+Diana Sue Manlulu	ehow.com,  ,floyd.com,  ,alexander.com,  ,olx.com,  
+Erica Suarez		hester.com,  ,rodgers.com,  
+Ferdinand Schmidt	albert.com,  ,marquez.com,  ,hopkins.com,  
+Francis Walsh		alston.com,  
+Hyacinth Bates		
+Joe Smith		olson.com,  ,connectme.com,  ,reyes.com,  ,fox.com,  ,flipfly.com,  ,waters.com,  
+John Supsupin		massey.com,  ,park.com,  ,keepvid.com,  ,byers.com,  ,uptownzone.com,  ,searchvillage.com,  
+Maria Gonzales		homes.com,  ,warcraft.com,  ,duran.com,  
+Masaki Fujimuto		cryshinjohn.com,  ,help.com,  ,loans.com,  
+Michael Choi		market.com,  ,youtube.com,  ,serrano.com,  ,drake.com,  ,assignmentworld.com,  
+Roosevelt Sebial	searchcomputers.com,  ,rogers.com,  
+Ryan Owen		finalsite.com,  ,searchhomes.com,  ,family.com,  ,decker.com,  
+Shafira Hansen		valencia.com,  ,phillips.com,  ,johnston.com,  
+Tom Owen		yestogod.com,  ,searchphilippines.com,  
+Toni Rose Panganiban	searchcoronado.com,  ,timespace.com,  ,atech.com,  ,lamb.com,  
+Ursula Holt		
