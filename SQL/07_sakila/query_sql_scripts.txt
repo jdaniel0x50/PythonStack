@@ -177,12 +177,10 @@ JOIN film_category ON film.film_id = film_category.film_id
 JOIN category ON film_category.category_id = category.category_id
 
 WHERE actor.first_name = "SANDRA" AND actor.last_name = "KILMER"
-
+ AND category.name = "action"
 ORDER BY film.title ASC;
 
-__RESULTS (first 5)__
-AGENT TRUMAN	A Intrepid Panorama of a ...	2006	PG	Deleted Scenes	Foreign	SANDRA KILMER
-ARTIST COLDBLOODED	A Stunning Reflection of ...	2006	NC-17	Trailers,Behind the Scenes	Sports	SANDRA KILMER
-BLACKOUT PRIVATE	A Intrepid Yarn of a Past...	2006	PG	Trailers,Deleted Scenes	Animation	SANDRA KILMER
-BULL SHAWSHANK	A Fanciful Drama of a Moo...	2006	NC-17	Deleted Scenes	Action	SANDRA KILMER
-CANDIDATE PERDITION	A Brilliant Epistle of a ...	2006	R	Deleted Scenes,Behind the Scenes	Classics	SANDRA KILMER
+__RESULTS__
+BULL SHAWSHANK		A Fanciful Drama of a Moo...	2006	NC-17	Deleted Scenes				Action	SANDRA KILMER
+DARN FORRESTER		A Fateful Story of a A Sh...	2006	G	Deleted Scenes				Action	SANDRA KILMER
+MAGNOLIA FORRESTER	A Thoughtful Documentary ...	2006	PG-13	Trailers,Commentaries,Deleted Scenes	Action	SANDRA KILMER
