@@ -1,0 +1,158 @@
+1. What query would you run to get all the countries that speak Slovene? Your query should return the name of the country, language and language percentage. Your query should arrange the result by language percentage in descending order. (1)
+SELECT countries.name AS country, languages.language AS language, languages.percentage AS language_percentage
+
+FROM countries
+
+LEFT JOIN languages
+
+ON countries.id = languages.country_id
+
+WHERE languages.language = "Slovene"
+
+ORDER BY languages.percentage DESC;
+
+__RESULTS__
+Slovenia	Slovene		87.9
+Austria		Slovene		0.4
+Italy		Slovene		0.2
+Croatia		Slovene		0.0
+
+
+2. What query would you run to display the total number of cities for each country? Your query should return the name of the country and the total number of cities. Your query should arrange the result by the number of cities in descending order. (3)
+SELECT countries.name AS country, COUNT(cities.id) AS count_cities
+
+FROM countries
+
+LEFT JOIN cities
+
+ON countries.id = cities.country_id
+
+GROUP BY countries.id
+
+ORDER BY count_cities DESC;
+
+__RESULTS (first 5)__
+China		363
+India		341
+United States	274
+Brazil		250
+Japan		248
+
+
+3. What query would you run to get all the cities in Mexico with a population of greater than 500,000? Your query should arrange the result by population in descending order. (1)
+SELECT countries.name AS country, cities.name AS city, cities.population AS population
+
+FROM countries
+
+LEFT JOIN cities
+
+ON countries.id = cities.country_id
+
+WHERE countries.name = "Mexico" AND cities.population > 500000
+
+ORDER BY population DESC;
+
+__RESULTS (first 5)__
+Mexico	Ciudad de México	8591309
+Mexico	Guadalajara		1647720
+Mexico	Ecatepec de Morelos	1620303
+Mexico	Puebla			1346176
+Mexico	Nezahualcóyotl		1224924
+
+
+4. What query would you run to get all languages in each country with a percentage greater than 89%? Your query should arrange the result by percentage in descending order. (1)
+SELECT countries.name AS country, languages.language AS language, languages.percentage AS percentage
+
+FROM countries
+
+LEFT JOIN languages
+
+ON countries.id = languages.country_id
+
+WHERE languages.percentage > 89
+
+ORDER BY languages.percentage DESC;
+
+__RESULTS (first 5)__
+Rwanda		Rwanda		100.0
+San Marino	Italian		100.0
+Bermuda		English		100.0
+Cape Verde	Crioulo		100.0
+Maldives	Dhivehi		100.0
+
+
+5. What query would you run to get all the countries with Surface Area below 501 and Population greater than 100,000? (2)
+SELECT name AS country, surface_area, population
+
+FROM countries
+
+WHERE surface_area < 501 AND population > 100000
+
+ORDER BY population DESC;
+
+__RESULTS (first 5)__
+Macao		18.00	473000
+Malta		316.00	380200
+Maldives	298.00	286000
+Barbados	430.00	270000
+Mayotte		373.00	149000
+
+
+6. What query would you run to get countries with only Constitutional Monarchy with a capital greater than 200 and a life expectancy greater than 75 years? (1)
+SELECT name AS country, government_form, capital, life_expectancy
+
+FROM countries
+
+WHERE government_form LIKE "Constitutional Monarchy" AND capital > 200 AND life_expectancy > 75
+
+ORDER BY name ASC;
+
+__RESULTS (first 5)__
+Denmark		Constitutional Monarchy		3315	76.5
+Jamaica		Constitutional Monarchy		1530	75.2
+Japan		Constitutional Monarchy		1532	80.7
+Jordan		Constitutional Monarchy		1786	77.4
+Liechtenstein	Constitutional Monarchy		2446	78.8
+
+
+7. What query would you run to get all the cities of Argentina inside the Buenos Aires district and have the population greater than 500, 000? The query should return the Country Name, City Name, District and Population. (2)
+SELECT countries.name AS "Country Name", cities.name AS "City Name", cities.district AS District, cities.population AS Population
+
+FROM countries
+
+LEFT JOIN cities
+
+ON countries.id = cities.country_id
+
+WHERE countries.name = "Argentina" AND
+
+cities.district = "Buenos Aires" AND
+
+cities.population > 500000
+
+ORDER BY cities.name ASC;
+
+__RESULTS__
+Argentina	Almirante Brown	Buenos Aires	538918
+Argentina	La Matanza	Buenos Aires	1266461
+Argentina	La Plata	Buenos Aires	521936
+Argentina	Lomas de Zamora	Buenos Aires	622013
+Argentina	Mar del Plata	Buenos Aires	512880
+Argentina	Quilmes	Buenos Aires	559249
+
+
+8. What query would you run to summarize the number of countries in each region? The query should display the name of the region and the number of countries. Also, the query should arrange the result by the number of countries in descending order. (2)
+SELECT countries.region AS Region, COUNT(countries.name) AS num_countries
+
+FROM countries
+
+GROUP BY countries.region
+
+ORDER BY num_countries DESC;
+
+__RESULTS (first 5)__
+Caribbean		24
+Eastern Africa		20
+Middle East		18
+Western Africa		17
+Southern Europe		15
