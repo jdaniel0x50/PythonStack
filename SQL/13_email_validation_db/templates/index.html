@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Email Validation</title>
+</head>
+<body>
+    <div class="container">
+        <h4>Please submit your e-mail address for validation</h4>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <h3 class="{{ category }}">{{ message }}</h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action='/process' method='POST'>
+            <div class="row">
+                <label class="columns two" for="first_name">First Name:</label><input class="columns three" type="text" name="first_name" id="first_name">
+                <label class="columns two" for="last_name">Last Name:</label><input class="columns three" type="text" name="last_name" id="last_name">
+            </div>
+            <div class="row">
+                <label class="columns two" for="email">Email Address:</label><input class="columns eight" type="text" name="email" id="email">
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
