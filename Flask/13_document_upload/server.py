@@ -16,6 +16,8 @@ def allowed_file(filename):
 
 
 
+
+
 def construct_flash_message(error_cat, field_name):
     # construct flash message from parameters
     if error_cat == "blank":

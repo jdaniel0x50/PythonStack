@@ -1,0 +1,23 @@
+ORIGINAL VERSION::
+class MySQLConnection(object):
+    def __init__(self, app, db):
+        config = {
+                'host': 'localhost',
+                'database': db, # we got db as an argument
+                'user': 'root',
+                'password': 'root',
+                'port': '3306' # change the port to match the port your SQL server is running on
+        }
+
+
+** CHANGED USERNAME
+OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'jdaniel'@'localhost' (using password: YES)")
+FIX :: Correct user to the username accessing the MySQL database server
+
+** CHANGED PASSWORD
+OperationalError: (_mysql_exceptions.OperationalError) (1045, "Access denied for user 'root'@'localhost' (using password: YES)")
+FIX :: If access denied, ensure the password supplied matches the password for user accessing the MySQL database server
+
+** CHANGED PORT NUMBER
+OperationalError: (_mysql_exceptions.OperationalError) (2003, "Can't connect to MySQL server on '127.0.0.1' (10061)")
+FIX :: Ensure the connection defined in the sqlalchemy python program matches the port number the SQL database is using
