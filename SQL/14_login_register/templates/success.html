@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Email Validation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="columns nine">
+            <p>You have successfully logged into our website on {{ session['loggedin_time'] }}</p>
+            <p>Current User: {{ session['loggedin_user'] }}</p>
+        </div>
+        <div class="columns three">
+            <form action="/logout" method="POST"><input type='submit' value='logout'></form>
+        </div>
+        <div class="columns twelve">
+            <hr>
+            <h4>Friends and Emails</h4>
+            <table>
+                <thead>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Date Created</th>
+                    <th>Delete Records</th>
+                </thead>
+                {% for friend in all_friends: %}
+                <tr>
+                    <td>{{ friend['first_name'] }}</td>
+                    <td>{{ friend['last_name'] }}</td>
+                    <td>{{ friend['email'] }}</td>
+                    <td>{{ friend['created_at'] }}</td>
+                    <!-- <td><form action="/delete_rec" method="POST"><input type="hidden" name="friend_id" value={{ friend['id'] }}><input type="submit" value="Delete"></form></td> -->
+                </tr>
+                {% endfor %}
+            </table>
+            <form action="/return_home" method="POST">
+                <input type="submit" value="Return Home">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
