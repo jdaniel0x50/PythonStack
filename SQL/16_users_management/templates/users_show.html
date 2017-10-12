@@ -16,7 +16,7 @@
             <form class="header_column two" action="/logout" method="POST"><input class="header_item" type='submit' value='logout'></form>
         </div>
         {% for user in all_users %}
-            <h3>User {{ user['id'] }}</h3>
+            <h3>User ID #{{ user['id'] }} ({{ user['username'] }})</h3>
             <p>Full Name: {{ user['first_name'] }} {{ user['last_name'] }}</p>
             <p>Username: {{ user['username'] }}</p>
             <p>Email: {{ user['email'] }}</p>

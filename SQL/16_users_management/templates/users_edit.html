@@ -16,8 +16,8 @@
             <form class="header_column two" action="/logout" method="POST"><input class="header_item" type='submit' value='logout'></form>
         </div>
 
-        <form class='user_login columns five' action='/users/{{ all_users[0]['id']}}/edit' method='POST'>
-            <h5 class='underline'>Edit User {{ all_users[0]['id'] }}</h5>
+        <form class='user_login columns eight' action='/users/{{ all_users[0]['id']}}/edit' method='POST'>
+            <h3>User ID #{{ all_users[0]['id'] }} ({{ all_users[0]['username'] }})</h3>
             <div class="row">
                 <label class="columns three" for="username">Username:</label><input class="columns eight" type="text" name="username" id="username" value="{{ all_users[0]['username'] }}">
             </div>
@@ -34,18 +34,16 @@
             <div class="row">
                 <input type="submit" value="Update">
             </div>
-
+            <div class="row">
+                <a href="/users/{{ all_users[0]['id']}}">Show</a>
+                <a href="/users">Go Back</a>
+            </div>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     {% for category, message in messages %}<ul><li class="{{ category }}">{{ message }}</li></ul>{% endfor %}
                 {% endif %}
             {% endwith %}
         </form>
-
-        <div class="row">
-            <a href="/users/{{ all_users[0]['id']}}">Show</a>
-            <a href="/users">Go Back</a>
-        </div>
     </div>
 </body>
 </html>
