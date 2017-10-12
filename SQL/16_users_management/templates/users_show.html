@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Show User</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h4 class="header_column six bluetext">Show User Record</h4>
+            <p class="header_column three rightalign bold large">Welcome, {{ session['loggedin_user'] }}</p>
+            <form class="header_column two" action="/logout" method="POST"><input class="header_item" type='submit' value='logout'></form>
+        </div>
+        {% for user in all_users %}
+            <h3>User {{ user['id'] }}</h3>
+            <p>Full Name: {{ user['first_name'] }} {{ user['last_name'] }}</p>
+            <p>Username: {{ user['username'] }}</p>
+            <p>Email: {{ user['email'] }}</p>
+            <p>Created at: {{ user['created_at'] }}</p>
+        {% endfor %}
+
+        <div class="row">
+            <a href="/users/{{ all_users[0]['id']}}/edit">Edit</a>
+            <a href="/delete/{{ all_users[0]['id']}}">Delete</a>
+            <a href="/users">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>

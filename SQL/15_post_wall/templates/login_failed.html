@@ -6,15 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
-    <title>Permission Denied</title>
+    <title>Login Failed</title>
 </head>
 <body>
     <div class="container">
-        <h6 class="red">You have not logged in and do not have permission to view this page.</h6>
-        <hr>
-        <p class="redtext">Please login with a valid email address and password or register a new user account.</p>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <h6 class="{{ category }}">{{ message }}</h6>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form action="/return_home" method="POST">
-            <input type="submit" value="Return Home">
+            <input type="submit" value="Try Again">
         </form>
     </div>
 </body>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Coding Dojo Wall User Login</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to Coding Dojo's User Wall</h2>
+        <form class='user_login columns five' action='/login' method='POST'>
+            <h5 class='underline'>Login</h5>
+            <div class="row">
+                <label class="columns three" for="username">Username:</label><input class="columns eight" type="text" name="username" id="username">
+            </div>
+            <div class="row">
+                <label class="columns three" for="password">Password:</label><input class="columns eight" type="password" name="password" id="password">
+            </div>
+            <input class="columns six" type="submit" value="Submit">
+        </form>
+        <form class='user_login columns five' action='/register' method='POST'>
+            <h5 class='underline'>Register New User</h5>
+            <div class="row">
+                <label class="columns three" for="username">Username:</label><input class="columns eight" type="text" name="username" id="username">
+            </div>
+            <div class="row">
+                <label class="columns four" for="first_name">First Name:</label><input class="columns eight" type="text" name="first_name" id="first_name">
+            </div>
+            <div class="row">
+                <label class="columns four" for="last_name">Last Name:</label><input class="columns eight" type="text" name="last_name" id="last_name">
+            </div>
+            <div class="row">
+                <label class="columns four" for="email">Email:</label><input class="columns eight" type="text" name="email" id="email">
+            </div>
+            <div class="row">
+                <label class="columns four" for="password">Password:</label><input class="columns eight" type="password" name="password" id="password">
+            </div>
+            <div class="row">
+                <label class="columns four" for="pass_conf">Confirm Password:</label><input class="columns eight" type="password" name="pass_conf" id="pass_conf">
+            </div>
+    
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}<ul><li class="{{ category }}">{{ message }}</li></ul>{% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+    </div>
+</body>
+</html>

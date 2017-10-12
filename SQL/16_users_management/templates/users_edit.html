@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='skeleton.css') }}">
+    <title>Edit User Record</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h4 class="header_column six bluetext">Edit User Record</h4>
+            <p class="header_column three rightalign bold large">Welcome, {{ session['loggedin_user'] }}</p>
+            <form class="header_column two" action="/logout" method="POST"><input class="header_item" type='submit' value='logout'></form>
+        </div>
+
+        <form class='user_login columns five' action='/users/{{ all_users[0]['id']}}/edit' method='POST'>
+            <h5 class='underline'>Edit User {{ all_users[0]['id'] }}</h5>
+            <div class="row">
+                <label class="columns three" for="username">Username:</label><input class="columns eight" type="text" name="username" id="username" value="{{ all_users[0]['username'] }}">
+            </div>
+            <div class="row">
+                <label class="columns four" for="first_name">First Name:</label><input class="columns eight" type="text" name="first_name" id="first_name" value="{{ all_users[0]['first_name'] }}">
+            </div>
+            <div class="row">
+                <label class="columns four" for="last_name">Last Name:</label><input class="columns eight" type="text" name="last_name" id="last_name" value="{{ all_users[0]['last_name'] }}">
+            </div>
+            <div class="row">
+                <label class="columns four" for="email">Email:</label><input class="columns eight" type="text" name="email" id="email" value="{{ all_users[0]['email'] }}">
+            </div>
+    
+            <div class="row">
+                <input type="submit" value="Update">
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}<ul><li class="{{ category }}">{{ message }}</li></ul>{% endfor %}
+                {% endif %}
+            {% endwith %}
+        </form>
+
+        <div class="row">
+            <a href="/users/{{ all_users[0]['id']}}">Show</a>
+            <a href="/users">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>
