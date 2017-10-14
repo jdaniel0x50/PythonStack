@@ -15,10 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from . import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', include('apps.main_app.urls')),
-    url(r'^time/', include('apps.time_app.urls')),
-    url(r'^word/', include('apps.random_word.urls'))
+    url(r'^$', views.index)
 ]

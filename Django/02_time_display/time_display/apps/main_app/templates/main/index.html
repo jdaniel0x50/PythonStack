@@ -7,17 +7,15 @@
     {% load static %}
     <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
     <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
-    <title>Current Time</title>
+    <title>Main Index</title>
 </head>
 <body>
     <div class="container">
-        <div class="box small_bx">
-            <p>The current date and time is:</p>
-            <!-- <p>{{date_time}}</p> -->
+        <div class="row">
+            <a href="/time">View current time and date</a>
         </div>
-        <div class="box wide_bx">
-            <h2>{{date}}</h2>
-            <h3>{{time}}</h3>
+        <div class="row">
+        <a href="/word">Generate a random word</a>
         </div>
     </div>
 </body>
