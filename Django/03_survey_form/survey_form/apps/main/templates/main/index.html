@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% load static %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    {% load static %}
     <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
     <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
     <title>Main Index</title>
@@ -12,12 +13,11 @@
 
 <body>
     <div class="container">
-        <div class="row">
-            <a href="/survey/show">Complete our survey</a>
-        </div>
-        <!-- <div class="row">
-            <a href="/word">Generate a random word</a>
-        </div> -->
+        <h1>Python Django Combined Assignments (separate apps)</h1>
+        <ul>
+            <li class="large"><a href="/survey/show">Django Assignment #3: Complete our survey</a></li>
+            <li class="large"><a href="/words">Django Assignment #4: View and Add Dictionary Words</a></li>
+        </ul>
     </div>
 </body>
 

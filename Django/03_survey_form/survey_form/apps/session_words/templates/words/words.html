@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
+    {% load static %}
+    <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
+    <title>View and Add Dictionary Words</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="side_box" action="/words/add" method="POST">
+            {% csrf_token %}
+            <h4>Add a new word to the Dictionary</h4>
+            <div class="row">
+                <input type="text" name="word">
+            </div>
+            <label class="underline" for="color">Choose color for your word</label><br>
+            <input type="radio" name="color" value="redtext" checked> Red<br>
+            <input type="radio" name="color" value="greentext"> Green<br>
+            <input type="radio" name="color" value="bluetext"> Blue<br>
+            <div class="row">
+                <input type="checkbox" name="large_font">
+                <label for="large_font">Display in Large Font</label>
+            </div>
+            <div class="row">
+                <input type="submit" value="Add to Dictionary">
+                <input type="reset">
+            </div>
+        </form>
+        <div class="side_box">
+            <div class="row">
+                <h4>Dictionary Words</h4>
+                <form action="/words/delete" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="delete words">
+                </form>
+            </div>
+            {% for word in words %}
+                <div class="row">
+                    <p class="word_list list_left {{word.color}} {{word.font_size}}">{{word.word}}</p>
+                    <p class="word_list list_right">- added on {{word.created_at}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

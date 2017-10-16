@@ -105,6 +105,28 @@
   padding: 25px;
   text-align: left;
 }
+.side_box {
+  display: inline-block;
+  vertical-align: top;
+  width: 45%;
+  padding: 20px;
+  text-align: left;
+}
+.side_box:first-child {
+  border-right: 2px darkslategray solid;
+}
+.word_list {
+  display: inline-block;
+}
+.list_left {
+  text-align: right;
+  margin-right: 20px;
+  width: 35%;
+}
+.list_right {
+  text-align: left;
+  width: 55%;
+}
 
 /* For devices larger than 400px */
 @media (min-width: 400px) {
@@ -244,7 +266,7 @@ p {
 }
 
 .large {
-  font-size: 125%;
+  font-size: 150%;
 }
 .bold {
   font-weight: 800;
@@ -257,23 +279,33 @@ p {
 }
 .redtext {
   color: red;
+  font-weight: bolder;
 }
 .bluetext {
   color: darkslateblue;
+  font-weight: bolder;
+}
+.greentext {
+  color: green;
+  font-weight: bolder;
 }
 .red {
-  background-color: red;
+  color: red;
+  font-weight: bolder;
+  /* background-color: red;
   border: 2px darkred solid;
   color: white;
   font-weight: bolder;
-  padding: 10px;
+  padding: 10px; */
 }
 .green {
-  background-color: green;
+  color: green;
+  font-weight: bolder;
+  /* background-color: green;
   border: 2px darkgreen solid;
   color: white;
   font-weight: bolder;
-  padding: 10px;
+  padding: 10px; */
 }
 
 /* Links
@@ -452,10 +484,9 @@ ol ul {
   margin: 1.5rem 0 1.5rem 3rem;
 }
 li {
-  /* margin-bottom: 0.2rem; */
-  font-size: .8em;
-  line-height: 1em;
-  margin-bottom: -.8em;
+  margin-bottom: 0.2rem;
+  /* font-size: .8em;
+  line-height: 1em; */
 }
 
 

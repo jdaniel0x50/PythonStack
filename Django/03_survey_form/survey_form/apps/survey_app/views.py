@@ -3,10 +3,14 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 
 def index(request):
-    del request.session['name']
-    del request.session['location']
-    del request.session['language']
-    del request.session['comment']
+    if 'name' in request.session:
+        del request.session['name']
+    if 'location' in request.session:
+        del request.session['location']
+    if 'language' in request.session:
+        del request.session['language']
+    if 'comment' in request.session:
+        del request.session['comment']
     return render(request, "survey/index.html")
 
 def submit(request):
