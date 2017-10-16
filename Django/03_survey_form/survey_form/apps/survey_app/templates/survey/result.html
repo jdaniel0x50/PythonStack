@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     {% load static %}
+    <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
+    <title>Your Submission</title>
+</head>
+<body>
+    <div class='container'>
+        <h1>Thank you for your submission!</h1>
+        <p>The following information was recorded:</p>
+        <div class='row'>
+            <p class='bold underline column'>Name:</p>
+            <p class='column'>{{ request.session.name }}</p>
+        </div>
+        <div class='row'>
+            <p class='bold underline column'>Dojo Location:</p>
+            <p class='column'>{{ request.session.location }}</p>
+        </div>
+        <div class='row'>
+            <p class='bold underline column'>Favorite Language:</p>
+            <p class='column'>{{ request.session.language }}</p>
+        </div>
+        <div class='row'>
+            <p class='bold underline column'>Comment:</p>
+            <p class='column'>{{ request.session.comment }}</p>
+        </div>
+        <div class='row'>
+            <form action="/survey/show" method="GET">
+                 {% csrf_token %}
+                 <input type="submit" value="Go Back">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

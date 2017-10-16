@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
+    <title>Survey Form</title>
+</head>
+<body>
+    <div class="container">
+        <form class="box" action="/survey/submit" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <label for="name">Your Name:</label>
+                <input type="text" name="name">
+            </div>
+            <div class="row">
+                <label for="location">Dojo Location:</label>
+                <input class='rightalign' list='locations' name='location'>
+                <datalist id='locations'>
+                    <option value='Chicago'>Chicago</option>
+                    <option value='San Francisco'>San Francisco</option>
+                    <option value='Denver'>Denver</option>
+                    <option value='Atlanta'>Atlanta</option>
+                    <option value='Boston'>Boston</option>
+                    <option value='Dallas'>Dallas</option>
+                </datalist>
+            </div>
+            <div class="row">
+                <label for="language">Favorite Language:</label>
+                <input class='rightalign' list='languages' name='language'>
+                <datalist id='languages'>
+                    <option value='HTML'>HTML</option>
+                    <option value='JavaScript'>JavaScript</option>
+                    <option value='Python'>Python</option>
+                    <option value='C/C++'>C/C++</option>
+                    <option value='Java'>Java</option>
+                    <option value='SQL'>SQL</option>
+                </datalist>
+            </div>
+            <div class="row">
+            <label for="comment">Comment (optional):</label>
+            </div>
+            <textarea class='rightalign' name='comment'></textarea>
+            <div class="row">
+            <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
