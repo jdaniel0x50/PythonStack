@@ -34,12 +34,13 @@ INSTALLED_APPS = [
     'apps.main',
     'apps.survey_app',
     'apps.session_words',
+    'apps.amadon_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [

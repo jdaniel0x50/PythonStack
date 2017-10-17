@@ -466,6 +466,9 @@ label > .label-body {
   font-weight: normal; 
   vertical-align: middle; }
 
+#small_box {
+  width: 75px;
+}
 
 
 /* Lists

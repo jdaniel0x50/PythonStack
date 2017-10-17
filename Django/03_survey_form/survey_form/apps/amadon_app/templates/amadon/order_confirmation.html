@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Confirmation</h1>
+        <p>Thank you for your order; your items will ship soon...</p>
+        <h3 class="underline">Order Summary</h3>
+        
+        <table>
+            <tr>
+                <th>Item(s) Ordered</th>
+                <th>Price</th>
+                <th>Quantity Ordered</th>
+                <th>Total Price</th>
+            </tr>
+            {%  for ordered_item in request.session.purchase_item %}
+                <tr>
+                    <td>{{ ordered_item.item_name }}</td>
+                    <td>{{ ordered_item.item_price }}</td>
+                    <td>{{ ordered_item.item_qty }}</td>
+                    <td></td>
+                </tr>
+            
+            {% endfor %}
+        </table>
+        <hr>
+        <form action="/amadon/home">
+            <input type="submit" value="Go Back">
+        </form>
+        <hr>
+        <h4 class="underline">Existing Purchases in the Database</h4>
+        <form action="/amadon/delete_purchases">
+            <input type="submit" value="Delete Purchases">
+        </form>
+        <hr>
+        <table>
+            <tr>
+                <th>Purchase ID</th>
+                <th>Customer</th>
+                <th>Purchase Date</th>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Order Total</th>
+            </tr>
+            {% load dictfilter %}
+            {% for purchase in purchases %}
+                <tr>
+                    <td>{{ purchase.id }}</td>
+                    <td>{{ purchase.customer_name }}</td>
+                    <td>{{ purchase.purchase_date }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    {% with purchase.id as id_key %}
+                        {% with purchase_totals|key:id_key as price_obj %}
+                            {% if price_obj > 0 %}
+                                <td class="rightalign">${{ price_obj.total_price }}</td>
+                            {% else %}
+                                <td></td>
+                            {% endif %}
+                        {% endwith %}
+                    {% endwith %}                    
+                {% for purchase_item in purchase_lines %}
+                    {% if purchase_item.related_purchase_order.id == purchase.id %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ purchase_item.item_to_purchase.item }}</td>
+                            <td>{{ purchase_item.item_to_purchase.price }}</td>
+                            <td>{{ purchase_item.quantity_to_purchase }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

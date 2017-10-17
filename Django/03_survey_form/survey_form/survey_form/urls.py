@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', include('apps.main.urls')),
     url(r'^survey/', include('apps.survey_app.urls')),
-    url(r'^words/', include('apps.session_words.urls'))
+    url(r'^words/', include('apps.session_words.urls')),
+    url(r'^amadon/', include('apps.amadon_app.urls')),
 ]

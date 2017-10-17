@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
+    <title>Create Items</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Create New Items to the Amadon Store</h1>
+        <form action="/amadon/create_item_submit" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <label for="item">Item:</label>
+                <input type="text" name="item">
+            </div>
+            <div class="row">
+                <label for="price">Price:</label>
+                <input type="number" name="price" min="0" value="0" step=".01">
+            </div>
+            <input type="submit" value="Create">
+        </form>
+        <form action="/amadon/home" method="GET">
+            <input type="submit" value="Go Back">
+        </form>
+        <hr>
+        <h4>Existing Items in the Database</h4>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Created Date</th>
+            </tr>
+            {% for item in items %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.item}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.created_at}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <form action="/amadon/delete" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="delete all items">
+        </form>
+
+    </div>
+</body>
+</html>
