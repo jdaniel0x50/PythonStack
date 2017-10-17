@@ -1,0 +1,54 @@
+Shell Commands for Books_Authors Model:
+<<created app>>
+<<added app to settings.py>>
+<<created models>>
+<<completed migrations>>
+from apps.books_likes.models import *
+
+// create 3 different users
+User.objects.create(first_name = "Mike", last_name = "Choi")
+User.objects.create(first_name = "Speros", last_name = "Spalding")
+User.objects.create(first_name = "John", last_name = "Parker")
+
+// have first user create 2 books
+user_1 = User.objects.first()
+user_2 = User.objects.get(id=2)
+user_3 = User.objects.last()
+book_1 = Book(name = "C Sharp", uploader_user = user_1)
+book_2 = Book(name = "Java", uploader_user = user_1)
+
+// have second user create 2 more books
+book_3 = Book(name = "Python", uploader_user = user_2)
+book_4 = Book(name = "PHP", uploader_user = user_2)
+
+// have third user create 2 other books
+book_5 = Book(name = "Tango with Django", uploader_user = user_3)
+book_6 = Book(name = "Rounding Out Angular JS", uploader_user = user_3)
+
+// have first user like the last book and first book
+book_1.liked_users.add(user_1)
+book_6.liked_users.add(user_1)
+
+// have the second user like first and third book
+book_1.liked_users.add(user_2)
+book_3.liked_users.add(user_2)
+
+// have the third book like all books
+for book in Book.objects.all():
+	book.liked_users.add(user_3)
+	book.save()
+
+// display all users who like first book
+for liked_user in book_1.liked_users.all():
+	liked_user.first_name
+
+// display the user that uploaded the first book
+Book.objects.first().uploader_user.first_name
+
+// display all users who like the second book
+for liked_user in book_2.liked_users.all():
+	liked_user.first_name
+
+// display books that the third user likes
+for book in user_3.liked_books.all():
+	book.name
