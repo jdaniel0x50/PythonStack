@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'apps.main',
+    'apps.user_login',
     'apps.survey_app',
     'apps.session_words',
     'apps.amadon_app',

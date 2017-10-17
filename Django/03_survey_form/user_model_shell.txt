@@ -1,0 +1,35 @@
+Shell Commands to work with Users model
+
+from apps.user_login.models import User
+
+// create users
+User.objects.create(username="user1", first_name="josh", last_name="daniel", email="email@email.com", age=37)
+User.objects.create(username="user2", first_name="joe", last_name="schmoe", email="email@email.com", age=40)
+User.objects.create(username="user3", first_name="jane", last_name="doe", email="email@email.com", age=23)
+
+// retrieve all users
+User.objects.all()
+
+// retrieve first user
+User.objects.first().first_name
+
+// retrieve last user
+User.objects.last().first_name
+
+// retrieve users sorted by first name
+users_desc_list = User.objects.all().order_by('-first_name')
+for user in users_desc_list:
+	user.first_name
+
+// get user with id = 3 and update user's last name to something else
+>>> user_3 = User.objects.get(id=3)
+>>> user_3.last_name
+u'doe'
+>>> user_3.last_name = "Miller"
+>>> user_3.save()
+>>> user_3.last_name
+'Miller'
+
+// delete record of user with id = 4
+User.objects.filter(id=4).delete()
+
