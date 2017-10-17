@@ -1,0 +1,65 @@
+Shell Commands for Dojo_Ninja Model:
+<<created app>>
+<<added app to settings.py>>
+<<created models>>
+<<completed migrations>>
+from apps.dojo_ninjas.models import *
+
+// create 3 dojos
+Dojo.objects.create(name = "CodingDojo Silicaon Valley", city = "Mountain View", state = "CA")
+Dojo.objects.create(name = "CodingDojo Seattle", city = "Seattle", state = "WA")
+Dojo.objects.create(name = "CodingDojo New York", city = "New York", state = "NY")
+
+// delete the three dojos
+Dojo.objects.all().delete()
+
+// create 3 additional dojos
+Dojo.objects.create(name = "CodingDojo Silicaon Valley", city = "Mountain View", state = "CA")
+Dojo.objects.create(name = "CodingDojo Seattle", city = "Seattle", state = "WA")
+Dojo.objects.create(name = "CodingDojo New York", city = "New York", state = "NY")
+
+// create 3 ninjas for first dojo
+dojo_1 = Dojo.objects.get(city="Mountain View")
+Ninja.objects.create(dojo = dojo_1, first_name = "james", last_name = "holden")
+Ninja.objects.create(dojo = dojo_1, first_name = "naomi", last_name = "belter")
+Ninja.objects.create(dojo = dojo_1, first_name = "detective", last_name = "miller")
+
+// create 3 ninjas for second dojo
+dojo_2 = Dojo.objects.get(city="Seattle")
+Ninja.objects.create(dojo = dojo_2, first_name = "fred", last_name = "johnson")
+Ninja.objects.create(dojo = dojo_2, first_name = "amos", last_name = "engineer")
+Ninja.objects.create(dojo = dojo_2, first_name = "alex", last_name = "pilot")
+
+// create 3 ninjas for third dojo
+dojo_3 = Dojo.objects.get(city="New York")
+Ninja.objects.create(dojo = dojo_3, first_name = "frodo", last_name = "baggins")
+Ninja.objects.create(dojo = dojo_3, first_name = "sam", last_name = "gangi")
+Ninja.objects.create(dojo = dojo_3, first_name = "pippin", last_name = "meariweather")
+
+// retrieve all ninjas at first dojo
+for ninja in Ninja.objects.filter(dojo = dojo_1):
+	ninja.first_name
+
+// retrieve all ninjas at the last dojo
+dojo_last = Dojo.objects.last()
+for ninja in Ninja.objects.filter(dojo = dojo_last):
+	ninja.first_name
+
+// retrieve all ninjas iterated for all dojos
+for dojo in Dojo.objects.all():
+	for ninja in dojo.ninjas_attending.all():
+		dojo.name + "-" + ninja.first_name
+u'CodingDojo Silicaon Valley-james'
+u'CodingDojo Silicaon Valley-naomi'
+u'CodingDojo Silicaon Valley-detective'
+u'CodingDojo Seattle-fred'
+u'CodingDojo Seattle-amos'
+u'CodingDojo Seattle-alex'
+u'CodingDojo New York-frodo'
+u'CodingDojo New York-sam'
+u'CodingDojo New York-pippin'
+
+// added new field for Dojo description:
+description = models.TextField(blank=True)
+
+
