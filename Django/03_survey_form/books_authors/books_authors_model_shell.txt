@@ -1,0 +1,92 @@
+Shell Commands for Books_Authors Model:
+<<created app>>
+<<added app to settings.py>>
+<<created models>>
+<<completed migrations>>
+from apps.dojo_ninjas.models import *
+from apps.books_authors.models import *
+
+// create 5 books
+Book.objects.create(name = "C Sharp")
+Book.objects.create(name = "Java")
+Book.objects.create(name = "Python")
+Book.objects.create(name = "PHP")
+Book.objects.create(name = "Ruby")
+
+// create 5 different authors
+Author.objects.create(first_name = "Mike", last_name = "Choi")
+Author.objects.create(first_name = "Speros", last_name = "Spalding")
+Author.objects.create(first_name = "John", last_name = "Parker")
+Author.objects.create(first_name = "Jadee", last_name = "Williams")
+Author.objects.create(first_name = "Jay", last_name = "Richmond")
+
+// add new field called "Notes"
+in models.py >>> notes = models.TextField(max_length=1000, blank=True)
+<<completed migrations>>
+<<re-imported models in shell>>
+
+// change name of 5th book to C#
+book = Book.objects.last()
+book.name = "C#"
+book.save()
+
+// change first_name of 5th author to Ketul
+author = Author.objects.get(first_name = "Jay")
+author.first_name = "Ketul"
+author.save()
+
+// assign first author to first 2 books
+book_1 = Book.objects.get(name = "C Sharp")
+book_2 = Book.objects.filter(name = "Java")
+Author.objects.first().books_written.add(book_1)
+Author.objects.first().books_written.add(book_2)
+
+// iterate through the names of the books that the first author wrote:
+author_1 = Author.objects.first()
+for book in author_1.books_written.all():
+	book.name
+u'C Sharp'
+u'Java'
+
+// assign the second author to the first 3 books
+author_2 = Author.objects.get(id=2)
+author_2.books_written.add(book_1)
+author_2.books_written.add(book_2)
+author_2.books_written.add(Book.objects.get(name = "Python"))
+
+// assign the 3rd author to the first 4 books
+author_3 = Author.objects.get(id=3)
+author_3.books_written.add(book_1)
+author_3.books_written.add(book_2)
+author_3.books_written.add(Book.objects.get(name = "Python"))
+author_3.books_written.add(Book.objects.get(name = "PHP"))
+
+// assign the 4th author to the first 5 books
+author_4 = Author.objects.get(id=3)
+author_4.books_written.add(book_1)
+author_4.books_written.add(book_2)
+author_4.books_written.add(Book.objects.get(name = "Python"))
+author_4.books_written.add(Book.objects.get(name = "PHP"))
+author_4.books_written.add(Book.objects.get(name = "C#"))
+
+// for 3rd book, retrieve all the authors
+book_3 = Book.objects.get(name = "Python")
+for author in book_3.authors.all():
+	author.first_name
+u'Speros'
+u'John'
+
+// for the 3rd book, remove the first author
+book_3.authors.remove(author_2)
+
+// for the 2nd book, add the 5th author as another author
+author_5 = Author.objects.last()
+book_2.authors.add(author_5)
+
+// find all books the 3rd author wrote
+for book in author_3.books_written.all():
+	book.name
+
+// find all books the 2nd author wrote
+for book in author_2.books_written.all():
+	book.name
