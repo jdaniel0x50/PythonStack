@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
+    <title>Show User</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 class="header_column six bluetext">User Record</h2>
+        </div>
+        <h4>User ID #{{ user.id }} ({{ user.username }})</h4>
+        <p><span class="bold">Full Name:</span> {{ user.first_name }} {{ user.last_name }}</p>
+        <p><span class="bold">Username:</span> {{ user.username }}</p>
+        <p><span class="bold">Email:</span> {{ user.email }}</p>
+        <p><span class="bold">Created at:</span> {{ user.created_at }}</p>
+        <div class="row">
+            <a href="/users/{{ all_user.id }}/edit">Edit</a>
+            <a href="/delete/{{ all_user.id }}">Delete</a>
+            <a href="/users">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>

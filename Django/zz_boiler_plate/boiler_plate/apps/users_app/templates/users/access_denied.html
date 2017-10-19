@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <link rel="stylesheet" href={% static '/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static '/css/skeleton.css' %}>
+    <title>Permission Denied</title>
+</head>
+<body>
+    <div class="container">
+        <h6 class="red">You have not logged in and do not have permission to view this page.</h6>
+        <hr>
+        <p class="redtext">Please login with a valid email address and password or register a new user account.</p>
+        <form action="/users" method="GET">
+            <input type="submit" value="Return Home">
+        </form>
+    </div>
+</body>
+</html>

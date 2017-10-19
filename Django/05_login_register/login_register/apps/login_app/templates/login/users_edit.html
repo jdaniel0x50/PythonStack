@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href={% static 'main/css/normalize.css' %}>
+    <link rel="stylesheet" href={% static 'main/css/skeleton.css' %}>
+    <title>Edit User Record</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h4 class="header_column six bluetext">Edit User Record</h4>
+        </div>
+
+        <form class='user_login columns eight' action='/users/{{ user.id }}/edit/process' method='POST'>
+            {% csrf_token %}
+            <h3>User ID #{{ user.id }} ({{ user.username }})</h3>
+            <div class="row">
+                <label class="columns three" for="username">Username:</label><input class="columns eight" type="text" name="username" id="username" value="{{ user.username }}">
+            </div>
+            <div class="row">
+                <label class="columns four" for="first_name">First Name:</label><input class="columns eight" type="text" name="first_name" id="first_name" value="{{ user.first_name }}">
+            </div>
+            <div class="row">
+                <label class="columns four" for="last_name">Last Name:</label><input class="columns eight" type="text" name="last_name" id="last_name" value="{{ user.last_name }}">
+            </div>
+            <div class="row">
+                <label class="columns four" for="email">Email:</label><input class="columns eight" type="text" name="email" id="email" value="{{ user.email }}">
+            </div>
+    
+            <div class="row">
+                <input type="submit" value="Update">
+            </div>
+            <div class="row">
+                <a href="/users/{{ user.id }}">Show</a>
+                <a href="/users">Go Back</a>
+            </div>
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="red" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

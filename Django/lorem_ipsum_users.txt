@@ -1,0 +1,19 @@
+***Create Batch Shell for New Users***
+
+from apps.users_app.models import *
+
+User.objects.create(username='user2', first_name='Stephen', last_name='Miles', email='smiles808@selimnehpets.org', birthdate='1995-12-16', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user3', first_name='Lawrence', last_name='Benson', email='lbenson461@nosnebecnerwal.com', birthdate='1948-02-20', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user4', first_name='Shane', last_name='Moss', email='smoss600@ssomenahs.org', birthdate='1985-02-19', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user5', first_name='Henry', last_name='Wells', email='hwells627@sllewyrneh.com', birthdate='1972-09-13', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user6', first_name='Zane', last_name='Sandoval', email='zsandoval943@lavodnasenaz.com', birthdate='1997-09-02', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user7', first_name='Callie', last_name='Joseph', email='cjoseph211@hpesojeillac.com', birthdate='1975-05-20', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user8', first_name='Nicolas', last_name='Sparks', email='nsparks19@skrapssalocin.biz', birthdate='2017-06-14', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user9', first_name='Kristi', last_name='Horton', email='khorton736@notrohitsirk.net', birthdate='1993-11-06', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user10', first_name='Calvin', last_name='Ryan', email='cryan326@nayrnivlac.biz', birthdate='1952-02-14', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user11', first_name='Terrell', last_name='Wagner', email='twagner255@rengawllerret.net', birthdate='1992-11-06', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user12', first_name='Kali', last_name='Lynch', email='klynch899@hcnylilak.com', birthdate='2012-12-27', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user13', first_name='Kyra', last_name='Smith', email='ksmith890@htimsaryk.org', birthdate='1944-02-12', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user14', first_name='Joanna', last_name='Reyes', email='jreyes697@seyerannaoj.com', birthdate='1952-07-01', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user15', first_name='Andrew', last_name='Hudson', email='ahudson561@nosduhwerdna.org', birthdate='1965-11-22', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))
+User.objects.create(username='user16', first_name='Gina', last_name='Oliver', email='goliver730@reviloanig.biz', birthdate='1925-07-03', password=bcrypt.hashpw('Password123'.encode(), bcrypt.gensalt()))

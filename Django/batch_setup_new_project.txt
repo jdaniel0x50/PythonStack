@@ -1,0 +1,19 @@
+** START FROM FOLDER WHERE PROJECT SHOULD STORE
+
+django-admin startproject <project_name>
+mkdir apps
+cd apps
+nul> __init__.py
+python ..\manage.py startapp <app_name>
+cd <app_name>
+nul> urls.py
+mkdir templates\<app_name>
+
+xcopy C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\zz_boiler_plate\boiler_plate\apps\users_app C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\<PATH> /O /X /E /H /K
+
+xcopy C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\zz_boiler_plate\boiler_plate\static C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\<PATH> /O /X /E /H /K
+
+xcopy C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\zz_boiler_plate\boiler_plate\boiler_plate\settings.py C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\<PATH> /O /X /E /H /K /Y
+
+xcopy C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\zz_boiler_plate\boiler_plate\boiler_plate\urls.py C:\Users\jvod4\Desktop\DojoAssignments\PythonStack\Django\<PATH> /O /X /E /H /K /Y
+
